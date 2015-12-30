@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1 Welcome #{user.name}!
+	img(src ='/images/noimage.png')
+	h3 What people are saying about you:
+	ul 
+		- for comment in user.comments
+			li= comment
+	
