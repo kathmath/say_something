@@ -152,6 +152,60 @@ router.get('/profile', ensureAuthenticated, function(req, res, next) {
 });
 
 
+
+//PUBLIC PROFILE
+
+//get public profile
+router.get('/publicprofile/:username', function(req, res, next) {
+	var username = req.params.username;
+	//get user info from db
+	User.getUserByUsername(username, function(err, user) {
+		if(err) {
+			console.log(err);
+			res.send(err);
+		} 
+		if(user === null) {
+			console.log('Unknown User');
+			return done(null, false, {message: 'Unknown User'});
+			}
+		else {
+			res.render('publicprofile', {
+				'user': user,
+				'username': user.username
+			});
+		}
+	});
+});
+
+
+//POST comment form values to database
+router.post('/publicprofile/:username', function(req, res, next) {
+	var username = req.params.username;
+	console.log(username);
+	var comment = req.body.comment;
+
+	User.addComment(comment, username, function(err, user) {
+		if(err) throw err;
+		console.log(user);
+	});
+
+	req.flash('success', 'Comment Added!');
+	res.redirect(username);
+});
+
+module.exports.addComment = function(comment, username, callback) {
+	// var newComment = comment;
+	// var query = {'username': username};
+
+	User.findOneAndUpdate(
+		{'username': username},
+		{$push: {'comments': comment}},
+		{safe: true, upsert: true},
+		callback
+	);
+}
+
+
 //LOGOUT
 router.get('/logout', function(req, res) {
 	req.logout();

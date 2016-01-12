@@ -14,24 +14,24 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
 
-
+//require routing paths
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// var profile = require('./routes/profile');
+var profile = require('./routes/profile');
 
 var app = express();
 
-// view engine setup
+// view engine setup - jade
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-//make db accessible to routes
+// make db accessible to routes
 app.use(function(req,res,next){
     req.db = db;
     next();
 });
 
-// Handle File Uploads
+// handle file uploads
 app.use(multer({dest:'./uploads'}));
 
 // uncomment after placing your favicon in /public
@@ -40,7 +40,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//Handle Express Sessions
+// handle express sessions
 app.use(session({
   secret:'secret',
   saveUninitialized: true,
@@ -71,7 +71,7 @@ app.use(expressValidator({
 
 app.use(cookieParser());
 
-//Serve static content for the app from the “public” directory in the application directory
+// serve static content for the app from the “public” directory in the application directory
 app.use(express.static(__dirname + '/public'));
 
 app.use(flash());
@@ -88,7 +88,7 @@ app.get('*', function(req, res, next){
 
 app.use('/', routes);
 app.use('/users', users);
-// app.use('/profile', profile);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

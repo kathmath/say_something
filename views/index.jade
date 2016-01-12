@@ -1,6 +1,26 @@
 extends layout
 
 block content
-  h1 Welcome to Say Something Nice 
-  p Sometimes we focus so much on what we need to improve we forget what makes us great. Say something nice is a way to let others share what they think makes us special and remind us where we shine. 
+	.jumbotron
+		h1 Welcome to Say Something Nice. 
+		p Sometimes we focus so much on what we need to improve we forget what makes us great. Say something nice is a way to let others share what they think makes us special and remind us where we shine. 
 
+		div.container.text-center
+			a.btn.btn-default.btn-lg(href='/users/register') Sign up for a free account!
+
+		div.container.text-center
+			h2 How it works:
+			.container-flex-row
+				.container-flex-col.flex-item
+					i.fa.fa-pencil
+					p Write something nice, helpful, constructive or positive about someone.
+				.container-flex-col.flex-item
+					<i class="fa fa-paper-plane"></i>
+					p We'll share what you say anonymously.
+				.container-flex-col.flex-item
+					<i class="fa fa-smile-o"></i>
+					p The recipient of your kind words gets a little boost. Who knows, you just might make their day!
+
+					
+
+		

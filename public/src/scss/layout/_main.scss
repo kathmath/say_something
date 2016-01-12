@@ -1,0 +1,175 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import "http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css";
+
+
+$margin: 1em;
+$padding: 1em;
+$color1: seashell;
+$color2: indianred;
+$color3: lightsalmon; 
+$font1: ('Open Sans', 'Arial', sans-serif);
+$hover: midnightblue;
+
+@mixin flex_container($flex-direction, $align-items, $justify-content, $wrap) {
+	display: flex;
+	flex-direction: $flex-direction;
+	align-items: $align-items;
+	justify-content: $justify-content;
+	flex-wrap: $wrap;
+}
+
+html, body {
+	height: 100%;
+	font-family: $font1;
+}
+
+label {
+	padding-bottom: 2px;
+}
+
+h2 {
+	padding-top: 6rem;
+	font-size: 3rem;
+}
+
+.wrapper {
+  background: linear-gradient(to right bottom, indianred, lightsalmon);
+  height: 100%;
+  color: seashell;
+}
+
+.container .jumbotron {
+  background: rgba(0,0,0,0);
+  margin: 0;
+  padding: 0;
+  padding-top: 4rem;
+  	h1 {
+  		padding-bottom: 2rem;
+  	}
+}
+
+.fa {
+	font-size: 4rem;
+	padding: 1rem;
+}
+
+.container-flex-row {
+	@include flex_container(row, flex-start, space-between, nowrap);
+	padding-top: 4rem;
+}
+
+.container-flex-col {
+	@include flex_container(column, center, space-between, wrap);
+}
+
+.flex-item {
+	display: flex;
+	width: 33%;
+	text-align: center;
+}
+
+.navbar-default {
+	background-color: rgba(0,0,0,0);
+	border: none;
+	margin-bottom: 50px;
+	padding-top: 1rem;
+}
+
+.navbar-default .navbar-brand {
+	color: $color1;	
+}
+
+.navbar-default .navbar-brand:hover, {
+	color: $hover;
+}
+
+.navbar-default .navbar-brand {
+	color: $color1;
+}
+
+.navbar-default .navbar-nav {
+    > li > a {
+   		color: $color1;
+    }
+
+    > li > a:hover {
+   		background-color: transparent;
+   		color: $hover;
+    }
+
+    > .active > a, > .active > a:hover {
+    	color: $color1;
+    	padding-bottom: 13px;
+    	background-color: transparent;
+    	border-bottom: 2px solid $color1;
+    }
+}
+
+.btn-default {
+    color: $color1;
+    background-color: $color3;
+    border: 2px solid $color1;
+    font-size: 1.2rem;
+}
+
+.btn-default:hover {
+	color: $color1;
+	background-color: $hover;
+	border-color: $color1;
+}
+
+.btn-lg {
+	margin-top: 2em;
+	padding: 1em;		
+} 
+
+ul.success li, ul.info li, ul.error li {
+	margin-top: 60px;
+	padding: 20px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	list-style: none;
+}
+
+ul.success li {
+	color: #fff;
+	background: lightseagreen;
+}
+
+ul.info li {
+	color: #fff;
+	background: skyblue;
+}
+
+ul.error li {
+	color: #fff;
+	background: tomato;
+}
+
+
+.form-control {
+	max-width: 30rem;
+}
+
+@media (max-width: 767px) {
+	.container .jumbotron {
+		h1 {
+			font-size: 2rem;
+		}
+		h2 {
+			font-size: 2rem;
+		}
+		p {
+			font-size: 1.2rem;
+		}
+	}
+
+	.container-flex-row {
+		@include flex_container(column, center, space-between, wrap);
+	}
+
+	.flex-item {
+		width: 100%;
+	}
+}
+

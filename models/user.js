@@ -63,22 +63,28 @@ module.exports.createUser = function(newUser, callback){
 		});	
 }
 
-// // > db.users.update({username: "baby"}, {$push:{comments:"soft head"}});
-// module.exports.createComment = function(newComment, callback){
-// 	var query = {username: username};
-// 	User.findOne(query, callback);
+// module.exports.addComment = function(comment, username, callback) {
+// 	// var newComment = comment;
+// 	// var query = {'username': username};
+// 	// var comment = comment;
 
+// 	User.findOneAndUpdate(
+// 		{'username': username},
+// 		{$push: {'comments': comment}},
+// 		{safe: true, upsert: true},
+// 		callback
+// 	);
 // }
 
 module.exports.addComment = function(comment, username, callback) {
-	// var newComment = comment;
-	// var query = {'username': username};
-
+	var query = {username: username};
 	User.findOneAndUpdate(
-		{'username': username},
+		query,
 		{$push: {'comments': comment}},
 		{safe: true, upsert: true},
 		callback
 	);
 }
+
+
 
