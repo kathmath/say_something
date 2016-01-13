@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb://localhost/saysomething');
+var mongodbUri = 'mongodb://kathmath:pass@ds037415.mongolab.com:37415/saysomething';
+mongoose.connect(mongodbUri);
 
+// mongoose.connect('mongodb://localhost/saysomething');
 // var db = mongoose.connection;
 
 //mongoose user schema

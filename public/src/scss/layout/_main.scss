@@ -75,16 +75,21 @@ h2 {
 	padding-top: 1rem;
 }
 
-.navbar-default .navbar-brand {
+.navbar .navbar-brand {
 	color: $color1;	
 }
 
-.navbar-default .navbar-brand:hover, {
+#welcome {
+	animation-name: slideIn;
+	animation-duration: 3s;
+}
+
+.navbar .navbar-brand:hover, {
 	color: $hover;
 }
 
-.navbar-default .navbar-brand {
-	color: $color1;
+a.navbar-brand {
+	
 }
 
 .navbar-default .navbar-nav {
@@ -120,7 +125,9 @@ h2 {
 
 .btn-lg {
 	margin-top: 2em;
-	padding: 1em;		
+	padding: 1em;
+	animation: colorChange 8s infinite normal;	
+	animation-delay: 4s;	
 } 
 
 ul.success li, ul.info li, ul.error li {
@@ -151,6 +158,41 @@ ul.error li {
 	max-width: 30rem;
 }
 
+//Animation
+
+@keyframes slideIn {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: $color3;
+  }
+  20% {
+    background-color: linear-gradient(to right, $color2, $color3);
+  }
+  40% {
+    background-color: linear-gradient(to left, $color2, $color3);
+  }
+  60% {
+    background-color: $color2;
+  }
+  80% {
+    background-color: linear-gradient(to right, $color2, $color3);
+  }
+  100% {
+    background-color: $color3;
+  }
+}
+
+
+//Media Queries
 @media (max-width: 767px) {
 	.container .jumbotron {
 		h1 {
@@ -172,4 +214,3 @@ ul.error li {
 		width: 100%;
 	}
 }
-

@@ -491,16 +491,17 @@ h2 {
   padding-top: 1rem;
 }
 
-.navbar-default .navbar-brand {
+.navbar .navbar-brand {
   color: seashell;
 }
 
-.navbar-default .navbar-brand:hover {
+#welcome {
+  animation-name: slideIn;
+  animation-duration: 3s;
+}
+
+.navbar .navbar-brand:hover {
   color: midnightblue;
-}
-
-.navbar-default .navbar-brand {
-  color: seashell;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -535,6 +536,8 @@ h2 {
 .btn-lg {
   margin-top: 2em;
   padding: 1em;
+  animation: colorChange 8s infinite normal;
+  animation-delay: 4s;
 }
 
 ul.success li, ul.info li, ul.error li {
@@ -562,6 +565,36 @@ ul.error li {
 
 .form-control {
   max-width: 30rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: lightsalmon;
+  }
+  20% {
+    background-color: linear-gradient(to right, indianred, lightsalmon);
+  }
+  40% {
+    background-color: linear-gradient(to left, indianred, lightsalmon);
+  }
+  60% {
+    background-color: indianred;
+  }
+  80% {
+    background-color: linear-gradient(to right, indianred, lightsalmon);
+  }
+  100% {
+    background-color: lightsalmon;
+  }
 }
 
 @media (max-width: 767px) {

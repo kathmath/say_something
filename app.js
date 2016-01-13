@@ -10,8 +10,11 @@ var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var flash = require('connect-flash');
+
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var mongodbUri = 'mongodb://kathmath:pass@ds037415.mongolab.com:37415/saysomething';
+mongoose.connect(mongodbUri);
 var db = mongoose.connection;
 
 //require routing paths
