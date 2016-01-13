@@ -13,8 +13,7 @@ var flash = require('connect-flash');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var mongodbUri = 'mongodb://kathmath:pass@ds037415.mongolab.com:37415/saysomething';
-mongoose.connect(mongodbUri);
+// var mongodbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/saysomething';
 var db = mongoose.connection;
 
 //require routing paths
@@ -23,6 +22,8 @@ var users = require('./routes/users');
 var profile = require('./routes/profile');
 
 var app = express();
+
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup - jade
 app.set('views', path.join(__dirname, 'views'));
