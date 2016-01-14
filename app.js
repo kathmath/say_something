@@ -23,7 +23,7 @@ var profile = require('./routes/profile');
 
 var app = express();
 
-app.set('port', process.env.PORT || 3000);
+// app.set('port', process.env.PORT || 3000);
 
 // view engine setup - jade
 app.set('views', path.join(__dirname, 'views'));
