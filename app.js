@@ -9,18 +9,17 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload = multer({ dest: './uploads' });
 var flash = require('connect-flash');
 
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-// var mongodbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/saysomething';
+
 var db = mongoose.connection;
 
 //require routing paths
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var profile = require('./routes/profile');
+// var profile = require('./routes/profile');
 
 var app = express();
 
@@ -37,10 +36,10 @@ app.use(function(req,res,next){
 });
 
 // handle file uploads
-// app.use(multer({dest:'./uploads'}));
+app.use(multer({dest:'./uploads'}));
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -93,7 +92,7 @@ app.get('*', function(req, res, next){
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/profile', profile);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
