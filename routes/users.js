@@ -4,6 +4,9 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var multer = require('multer');
+var upload = multer({ dest: './uploads' });
+
 var User = require('../models/user');
 
 
@@ -17,7 +20,7 @@ router.get('/register', function(req, res, next) {
 });
 
 //POST registration form values to database
-router.post('/register', function(req, res, next) {
+router.post('/register', upload.single('profileimage'), function(req, res, next) {
 	//get form values
 	var name = req.body.name;
 	var email = req.body.email;
@@ -28,16 +31,16 @@ router.post('/register', function(req, res, next) {
 
 
 	//check for image field
-	if(req.files.profileimage) {
+	if(req.file.profileimage) {
 		console.log('Uploading File...');
 
 		//file info
-		var profileImageOriginalName = req.files.profileimage.originalname;
-		var profileImageName = req.files.profileimage.name;
-		var profileImageMime = req.files.profileimage.mimetype;
-		var profileImagePath = req.files.profileimage.path;
-		var profileImageExtension = req.files.profileimage.extension;
-		var profileImageSize = req.files.profileimage.size;
+		var profileImageOriginalName = req.file.profileimage.originalname;
+		var profileImageName = req.file.profileimage.name;
+		var profileImageMime = req.file.profileimage.mimetype;
+		var profileImagePath = req.file.profileimage.path;
+		var profileImageExtension = req.file.profileimage.extension;
+		var profileImageSize = req.file.profileimage.size;
 	}	else {
 		//set default image
 		var profileImageName = 'noimage.png';

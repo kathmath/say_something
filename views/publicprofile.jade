@@ -5,12 +5,9 @@ block content
 		h1 Say something nice about #{user.username}! 
 		form(method='post', action='/users/publicprofile/#{username}')
 			.form-group
-				input.form-control(name='comment', type='text')
+				input.form-control.full(name='comment', type='text')
 			input.btn.btn-default(type='submit', value='Submit')
-		h3 What people are saying about #{user.username}:
-		ul 
-			- for comment in user.comments
-				li= comment
+	
 
 
 

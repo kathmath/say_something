@@ -1,15 +1,12 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+var morgan = require('morgan');
 var expressValidator = require('express-validator');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
-var multer = require('multer');
-var upload = multer({ dest: './uploads' });
 var flash = require('connect-flash');
 
 var mongo = require('mongodb');
@@ -36,10 +33,9 @@ app.use(function(req,res,next){
     next();
 });
 
+//logging
+app.use(morgan('combined'));
 
-// uncomment after placing your favicon in /public
-// app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -74,15 +70,17 @@ app.use(expressValidator({
 
 app.use(cookieParser());
 
-// serve static content for the app from the “public” directory in the application directory
-app.use(express.static(__dirname + '/public'));
+// serve static content 
+app.use(express.static(__dirname + '/static'));
 
+//flash messages on action
 app.use(flash());
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
 
+//have user available
 app.get('*', function(req, res, next){
   res.locals.user = req.user || null;
   // console.log(res.locals.user);
@@ -93,7 +91,7 @@ app.use('/', routes);
 app.use('/users', users);
 
 
-// catch 404 and forward to error handler
+// 404
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
@@ -102,8 +100,7 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-// development error handler
-// will print stacktrace
+// development - w stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -114,8 +111,7 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// production - no stacktrace
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {

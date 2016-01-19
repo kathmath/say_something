@@ -2,10 +2,9 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var mongodbUri = 'mongodb://heroku_1bbmxgrn:lk7vcdtm8fg9rhbr9hjl7vu0it@ds047095.mongolab.com:47095/heroku_1bbmxgrn';
-// mongoose.connect(mongodbUri);
 
-mongoose.connect(process.env.MONGOLAB_URI || mongodbUri || 'mongodb://localhost/saysomething');
-// mongoose.connect('mongodb://localhost/saysomething');
+// mongoose.connect(process.env.MONGOLAB_URI || mongodbUri || 'mongodb://localhost/saysomething');
+mongoose.connect('mongodb://localhost/saysomething');
 
 //mongoose user schema
 var UserSchema = mongoose.Schema({
@@ -33,10 +32,7 @@ var UserSchema = mongoose.Schema({
 
 //mongoose model
 var User = mongoose.model('User', UserSchema);
-
 module.exports = User;
-
-
 
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){
@@ -64,19 +60,6 @@ module.exports.createUser = function(newUser, callback){
 			newUser.save(callback);
 		});	
 }
-
-// module.exports.addComment = function(comment, username, callback) {
-// 	// var newComment = comment;
-// 	// var query = {'username': username};
-// 	// var comment = comment;
-
-// 	User.findOneAndUpdate(
-// 		{'username': username},
-// 		{$push: {'comments': comment}},
-// 		{safe: true, upsert: true},
-// 		callback
-// 	);
-// }
 
 module.exports.addComment = function(comment, username, callback) {
 	var query = {username: username};

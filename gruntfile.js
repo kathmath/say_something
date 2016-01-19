@@ -6,8 +6,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       build: {
-        src: 'public/src/js/*.js',
-        dest: 'public/js/script.min.js'
+        src: 'static/src/js/*.js',
+        dest: 'static/js/script.min.js'
       },
       dev: {
       	options: {
@@ -16,8 +16,8 @@ module.exports = function(grunt) {
       		compress: false,
       		preserveComments: 'all'
       	},
-      	src: 'public/src/js/*.js',
-        dest: 'public/js/script.min.js'
+      	src: 'static/src/js/*.js',
+        dest: 'static/js/script.min.js'
       }
     },
     sass: {
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     			outputStyle: 'expanded'
     		},
     		files: {
-    			'public/css/style.css' : 'public/src/scss/style.scss'
+    			'static/css/style.css' : 'static/src/scss/style.scss'
     		}
     	},
     	build: {
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
     			outputStyle: 'compressed'
     		},
     		files: {
-    			'public/css/style.css' : 'public/src/scss/style.scss'
+    			'static/css/style.css' : 'static/src/scss/style.scss'
     		}
     	}
     },
@@ -53,11 +53,11 @@ module.exports = function(grunt) {
   	},
   	watch: {
   		js: {
-  			files: ['public/src/js/*.js'],
+  			files: ['static/src/js/*.js'],
   			tasks: ['uglify:dev']
   		},
   		css: {
-  			files: ['public/src/scss/**/*.scss'],
+  			files: ['static/src/scss/**/*.scss'],
   			tasks: ['sass:dev']
   		}
   	},
