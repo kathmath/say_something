@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-var mongodbUri = 'mongodb://kathmath:pass@ds037415.mongolab.com:37415/saysomething';
+var mongodbUri = 'mongodb://heroku_1bbmxgrn:lk7vcdtm8fg9rhbr9hjl7vu0it@ds047095.mongolab.com:47095/heroku_1bbmxgrn';
 // mongoose.connect(mongodbUri);
 
-// mongoose.connect(process.env.MONGOLAB_URI || mongodbUri || 'mongodb://localhost/saysomething');
-mongoose.connect('mongodb://localhost/saysomething');
+mongoose.connect(process.env.MONGOLAB_URI || mongodbUri || 'mongodb://localhost/saysomething');
+// mongoose.connect('mongodb://localhost/saysomething');
 
 //mongoose user schema
 var UserSchema = mongoose.Schema({
