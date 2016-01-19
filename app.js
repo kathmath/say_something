@@ -17,11 +17,10 @@ var db = mongoose.connection;
 //require routing paths
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// var profile = require('./routes/profile');
 
 var app = express();
 
-// app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup - jade
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +33,9 @@ app.use(function(req,res,next){
 });
 
 //logging
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
+//parsing 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

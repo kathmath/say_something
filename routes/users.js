@@ -4,14 +4,14 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var multer = require('multer');
-var upload = multer({ dest: './uploads' });
+var multer  = require('multer');
+var upload = multer();
 
 var User = require('../models/user');
 
 
-//REGISTER
 
+//REGISTER
 //GET registration page
 router.get('/register', function(req, res, next) {
 	res.render('register', {
@@ -20,7 +20,7 @@ router.get('/register', function(req, res, next) {
 });
 
 //POST registration form values to database
-router.post('/register', upload.single('profileimage'), function(req, res, next) {
+router.post('/register', upload.array(), function(req, res, next) {
 	//get form values
 	var name = req.body.name;
 	var email = req.body.email;
@@ -28,23 +28,6 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
 	var comment = req.body.comment;
 	var password = req.body.password;
 	var password2 = req.body.password2;
-
-
-	//check for image field
-	if(req.file.profileimage) {
-		console.log('Uploading File...');
-
-		//file info
-		var profileImageOriginalName = req.file.profileimage.originalname;
-		var profileImageName = req.file.profileimage.name;
-		var profileImageMime = req.file.profileimage.mimetype;
-		var profileImagePath = req.file.profileimage.path;
-		var profileImageExtension = req.file.profileimage.extension;
-		var profileImageSize = req.file.profileimage.size;
-	}	else {
-		//set default image
-		var profileImageName = 'noimage.png';
-	}
 
 	//form validation
 	req.checkBody('name', 'Name is required').notEmpty();
@@ -72,7 +55,6 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
 			email: email,
 			username: username,
 			password: password,
-			profileimage: profileImageName,
 			comments: comment
 		});
 
@@ -104,7 +86,6 @@ passport.deserializeUser(function(id, done){
 
 
 //LOGIN
-
 //go to login page
 router.get('/login', function(req, res, next) {
 	console.log('welcome, please log in!');
@@ -146,7 +127,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/users/l
 
 
 //PROFILE
-
 //logged in profile
 router.get('/profile', ensureAuthenticated, function(req, res, next) {
     res.render('profile', {
