@@ -9,6 +9,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var upload = multer({ dest: './uploads' });
 var flash = require('connect-flash');
 
 var mongo = require('mongodb');
@@ -35,8 +36,6 @@ app.use(function(req,res,next){
     next();
 });
 
-// handle file uploads
-app.use(multer({dest:'./uploads'}));
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(__dirname + '/public/favicon.ico'));
